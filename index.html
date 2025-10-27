@@ -31,6 +31,9 @@
                 font-size: 10px;
             }
         }
+        .active {
+            text-decoration: underline;
+        }
     </style>
 </head>
 
@@ -43,9 +46,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavs">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item active"><a class="nav-link" href="#">Overview</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Tech Specs</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Quick Guide</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#hero">Overview</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#bento-details">Design</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#accordion-specs">Tech Specs</a></li>
                 </ul>
             </div>
         </div>
@@ -128,6 +131,7 @@
         </div>
     </section>
     <section id="accordion-specs" class="container my-5 py-5">
+        <h2 class="fw-semibold mt-5">Dive deeper into its Tech Specs</h2>
         <div class="accordion accordion-flush" id="accordionFlush">
             <div class="accordion-item">
                 <h2 class="accordion-header">
@@ -140,47 +144,47 @@
                     <div class="accordion-body">
                         <div class="row g-3 justify-content-center">
                             <div class="col-12 col-sm-6 col-md-4 col-lg-2 text-center">
-                                <div class="card border-0 shadow-sm rounded-4">
-                                    <img src="assets/images/airpods-max/starlight.png" class="card-img-top"
+                                <div class="card border-0 shadow-sm rounded-4" style="background-color: #E9E1D4;">
+                                    <img src="assets/images/airpods-max/starlight.png" class="card-img-top" 
                                         alt="Airpods-Max in Starlight">
                                     <div class="card-body">
-                                        <p class="card-text" style="color: #CCBEB1;">starlight</p>
+                                        <h5 class="card-text fw-semibold" style="color: #CCBEB1;">starlight</h5>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12 col-sm-6 col-md-4 col-lg-2 text-center">
-                                <div class="card border-0 shadow-sm rounded-4">
+                                <div class="card border-0 shadow-sm rounded-4" style="background-color: #FFC09D;">
                                     <img src="assets/images/airpods-max/orange.png" class="card-img-top"
                                         alt="Airpods-Max in Orange">
                                     <div class="card-body">
-                                        <p class="card-text" style="color: #E2A48D;">orange</p>
+                                        <h5 class="card-text fw-semibold" style="color: #E2A48D;">orange</h5>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12 col-sm-6 col-md-4 col-lg-2 text-center">
-                                <div class="card border-0 shadow-sm rounded-4">
+                                <div class="card border-0 shadow-sm rounded-4" style="background-color: #DAD7E0;">
                                     <img src="assets/images/airpods-max/purple.png" class="card-img-top"
                                         alt="Airpods-Max in Purple">
                                     <div class="card-body">
-                                        <p class="card-text" style="color: #AFA6BB;">purple</p>
+                                        <h5 class="card-text fw-semibold" style="color: #AFA6BB;">purple</h5>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12 col-sm-6 col-md-4 col-lg-2 text-center">
-                                <div class="card border-0 shadow-sm rounded-4">
+                                <div class="card border-0 shadow-sm rounded-4" style="background-color: #91A9B5;">
                                     <img src="assets/images/airpods-max/blue.png" class="card-img-top"
                                         alt="Airpods-Max in Blue">
                                     <div class="card-body">
-                                        <p class="card-text" style="color: #64727D;">blue</p>
+                                        <h5 class="card-text fw-semibold" style="color: #64727D;">blue</h5>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12 col-sm-6 col-md-4 col-lg-2 text-center">
-                                <div class="card border-0 shadow-sm rounded-4">
+                                <div class="card border-0 shadow-sm rounded-4" style="background-color: #2A3139;">
                                     <img src="assets/images/airpods-max/midnight.png" class="card-img-top"
                                         alt="Airpods-Max in Midnight">
                                     <div class="card-body">
-                                        <p class="card-text" style="color: #22252A;">midnight</p>
+                                        <h5 class="card-text fw-semibold" style="color: #64727D;">midnight</h>
                                     </div>
                                 </div>
                             </div>
@@ -335,6 +339,35 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
         crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const navLinks = document.querySelectorAll('.navbar .nav-link')
+        const overviewLink = document.querySelector('.navbar .nav-link[href="#hero"]');
+        if (overviewLink) {
+            overviewLink.classList.add('active');
+        }
+        navLinks.forEach(link => {
+            link.addEventListener("click", function (e) {
+                e.preventDefault();
+                // section
+                const targetId = this.getAttribute("href").substring(1);
+                const target = document.getElementById(targetId);
+                if (target) {
+                    target.scrollIntoView({behavior: "smooth", block: "start"});
+                }
+                // remove decortion to active link
+                navLinks.forEach(nav => nav.classList.remove("active"));
+                // add decoration to active link    
+                this.classList.add("active");
+                // for mobile
+                const bsCollapse = document.querySelector('.navbar-collapse');
+                if (bsCollapse.classList.contains('show')) {
+                    new bootstrap.Collapse(bsCollapse).toggle();
+                }
+            });
+        });
+    });
+    </script>
 </body>
 
 </html>
